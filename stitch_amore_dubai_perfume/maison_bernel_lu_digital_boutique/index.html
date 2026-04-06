@@ -162,7 +162,7 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%) translateY(8%) scale(0.92);
+            transform: translate(-50%, -50%) translateY(8%) scale(0.85);
             width: 100%;
             height: 100%;
             object-fit: contain;
@@ -171,7 +171,7 @@
         }
         @media (min-width: 768px) {
             #vessel-fallback {
-                transform: translate(-50%, -50%) translate(25%, 8%) scale(0.92);
+                transform: translate(-50%, -50%) translate(25%, 8%) scale(0.85);
             }
         }
     </style>
@@ -406,16 +406,15 @@
         let drawWidth, drawHeight, offsetX, offsetY;
 
         // Use 'Cover' logic to fill the screen
+        // --- Immersive 'Contain' Logic for perfect sync ---
         if (imgRatio > canvasRatio) {
-            drawHeight = canvas.height;
-            drawWidth = canvas.height * imgRatio;
-        } else {
             drawWidth = canvas.width;
             drawHeight = canvas.width / imgRatio;
+        } else {
+            drawHeight = canvas.height;
+            drawWidth = canvas.height * imgRatio;
         }
-
-        // Apply an optimized 'Zoom' to perfectly frame the full composition
-        const zoom = 0.92; 
+        const zoom = 0.85; 
         const finalWidth = drawWidth * zoom;
         const finalHeight = drawHeight * zoom;
 
