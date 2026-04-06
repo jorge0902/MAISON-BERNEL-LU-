@@ -192,7 +192,7 @@
         <canvas id="vessel-canvas" class="relative z-10" style="opacity: 1;"></canvas>
         
         <div class="vessel-content px-8 md:px-24 w-full max-w-7xl">
-            <div class="flex flex-col gap-6" id="vessel-text" style="opacity: 0; transform: translateY(20px);">
+            <div class="flex flex-col gap-6" id="vessel-text" style="opacity: 0; transform: translateY(60px); padding-top: 40px;">
                 <span class="font-label text-secondary tracking-[0.4em] uppercase text-[10px] md:text-sm">Exclusivité de Paris à Dubaï</span>
                 <h1 class="font-headline italic text-4xl md:text-7xl text-primary leading-tight max-w-4xl">
                     L'Art de la Seduction <br/> <span class="not-italic text-on-surface">Sans Limites</span>
@@ -429,7 +429,7 @@
             render();
             // Reveal Hero elements immediately after first draw
             if (fallback) fallback.style.opacity = "0";
-            gsap.to("#vessel-text", { opacity: 1, y: 0, duration: 1.5, ease: "power2.out" });
+            gsap.to("#vessel-text", { opacity: 1, y: 40, duration: 1.5, ease: "power2.out" });
         };
 
         if (firstImg.complete) {
@@ -503,23 +503,5 @@
             img.style.transform = `translate3d(${12 + x}px, ${12 + y}px, 0)`;
         }
     });
-
-    // --- Interactive Smart Navbar (Auto-hide) ---
-    let lastScrollY = window.scrollY;
-    const mainNav = document.getElementById("main-nav");
-
-    window.addEventListener("scroll", () => {
-        const currentScrollY = window.scrollY;
-        
-        if (currentScrollY > lastScrollY && currentScrollY > 100) {
-            // Scrolling down - hide navbar
-            gsap.to(mainNav, { y: "-100%", duration: 0.5, ease: "power2.out" });
-        } else {
-            // Scrolling up or at top - show navbar
-            gsap.to(mainNav, { y: "0%", duration: 0.4, ease: "power2.out" });
-        }
-        
-        lastScrollY = currentScrollY;
-    }, { passive: true });
 </script>
 </body></html>
