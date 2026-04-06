@@ -155,8 +155,19 @@
         }
         .vessel-content {
             position: relative;
-            z-index: 20; /* Keep text above everything */
+            z-index: 20; 
             pointer-events: none;
+            width: 100%;
+            display: flex;
+            justify-content: flex-start; /* Push text UP on mobile */
+            padding-top: 100px;
+        }
+
+        @media (min-width: 768px) {
+            .vessel-content {
+                justify-content: center;
+                padding-top: 0;
+            }
         }
         #vessel-fallback {
             position: absolute;
@@ -595,7 +606,7 @@
             drawHeight = canvas.height;
             drawWidth = canvas.height * imgRatio;
         }
-        const zoom = 0.98; 
+        const zoom = window.innerWidth > 768 ? 0.98 : 1.35; 
         const finalWidth = drawWidth * zoom;
         const finalHeight = drawHeight * zoom;
 
@@ -634,8 +645,6 @@
                     ease: "power3.inOut",
                     onComplete: () => {
                         preloader.style.display = "none";
-                        // Reveal Hero text after loader is gone for extra polish
-                        gsap.to("#vessel-text", { opacity: 1, y: 40, duration: 2, delay: 0.2 });
                     }
                 });
             }
@@ -727,21 +736,20 @@
         }
     });
 
-    // --- Hero Text Scroll Entrance ---
+    // --- Hero Text Scrub Revelation (Rising from Below via Scroll) ---
     gsap.fromTo("#vessel-text", 
         { 
             opacity: 0, 
-            y: 160 // Start from lower
+            y: 500 // Deep in the 2nd section (visually)
         }, 
         { 
             opacity: 1, 
-            y: 40, // Target final position
-            duration: 1.5,
-            ease: "power2.out",
+            y: -50, // Final landing position
             scrollTrigger: {
                 trigger: "#vessel-section",
-                start: "top top+=20", // Trigger shortly after scroll start
-                toggleActions: "play none none reverse"
+                start: "top top",
+                end: "top -100%", // Controlled by user's initial scroll
+                scrub: 1 // Link movement directly to scroll
             }
         }
     );
