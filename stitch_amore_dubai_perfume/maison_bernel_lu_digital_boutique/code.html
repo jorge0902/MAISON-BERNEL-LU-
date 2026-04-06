@@ -182,8 +182,14 @@
     <div class="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
         <!-- Background Ambient Glow -->
         <div class="absolute w-[800px] h-[800px] bg-primary/10 blur-[180px] rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
-        
-        <canvas id="vessel-canvas"></canvas>
+     <div class="h-full w-full relative">
+        <!-- Fail-safe Fallback Image (Visible immediately) -->
+        <img id="vessel-fallback" 
+             src="../../ezgif-8fd84165fe920d55-png-split/ezgif-frame-001.png" 
+             class="absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-1000"
+             style="filter: brightness(0.9) contrast(1.1); pointer-events: none;" />
+
+        <canvas id="vessel-canvas" class="relative z-10 opacity-0 transition-opacity duration-700"></canvas>
         
         <div class="vessel-content px-8 md:px-24 w-full max-w-7xl">
             <div class="flex flex-col gap-6 opacity-0 pt-20 md:pt-28" id="vessel-text">
@@ -336,17 +342,19 @@
     const preloadImages = async () => {
         const promises = [];
         for (let i = 0; i < frameCount; i++) {
+            // Skip frame 0 as it's handled by fast-load
+            if (i === 0 && images[0]) continue;
+
             const img = new Image();
             img.src = currentFrame(i);
-            images.push(img);
-            // Ensure the image is decoded by the GPU before it's ever needed
+            images[i] = img; // Direct index assignment to prevent shifting
+            
             if (img.decode) {
                 promises.push(img.decode().catch(e => console.error("Decode error", e)));
             }
         }
         await Promise.all(promises);
-        console.log("All frames decoded and ready for GPU.");
-        // Trigger initial render once everything is ready
+        console.log("All frames decoded.");
         render();
     };
 
@@ -408,12 +416,23 @@
 
     // --- Optimized Lifecycle: Fast-Load 1st Frame, then Async Decode the rest ---
     const initBoutique = async () => {
+        const fallback = document.getElementById("vessel-fallback");
+        const canvasEl = document.getElementById("vessel-canvas");
+
         // 1. Fast-render the first frame immediately
         const firstImg = new Image();
         firstImg.src = currentFrame(0);
         images[0] = firstImg;
-        await new Promise(resolve => firstImg.onload = resolve);
+        
+        await new Promise(resolve => {
+            if (firstImg.complete) resolve();
+            else firstImg.onload = resolve;
+        });
+        
         render();
+        // Reveal canvas and hide fallback once first frame is drawn
+        canvasEl.style.opacity = "1";
+        if (fallback) fallback.style.opacity = "0";
 
         // 2. Load and decode the rest in the background
         await preloadImages();
