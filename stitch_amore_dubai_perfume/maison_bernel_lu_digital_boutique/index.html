@@ -396,7 +396,7 @@
         lastFrame = frameIndex;
 
         const img = images[frameIndex];
-        if (!img || !img.complete) return;
+        if (!img || !img.complete || img.naturalWidth === 0) return false;
 
         context.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -431,6 +431,7 @@
         context.fillRect(0, 0, canvas.width, canvas.height);
 
         context.drawImage(img, offsetX, offsetY, finalWidth, finalHeight);
+        return true;
     }
 
     // --- Optimized Lifecycle: Fast-Load 1st Frame, then Async Decode the rest ---
@@ -444,10 +445,13 @@
         images[0] = firstImg;
 
         const showFirstFrame = () => {
-            render();
-            // Reveal Hero elements immediately after first draw
-            if (fallback) fallback.style.opacity = "0";
-            // Hero text is now handled by ScrollTrigger 
+            // Only hide the fallback if the canvas successfully draws the first frame
+            if (render()) {
+                if (fallback) fallback.style.opacity = "0";
+            } else {
+                // If draw failed, try again in 50ms (safety loop)
+                setTimeout(showFirstFrame, 50);
+            }
         };
 
         if (firstImg.complete) {
