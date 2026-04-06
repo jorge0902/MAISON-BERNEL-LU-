@@ -130,8 +130,8 @@
         }
         .reveal {
             opacity: 0;
-            transform: translateY(40px);
-            transition: all 1s ease-out;
+            transform: translateY(30px);
+            transition: opacity 1.2s ease-out, transform 1.2s ease-out;
         }
         .reveal.active {
             opacity: 1;
@@ -186,13 +186,13 @@
         <!-- Fail-safe Fallback Image (Visible immediately) -->
         <img id="vessel-fallback" 
              src="../../ezgif-8fd84165fe920d55-png-split/ezgif-frame-001.png" 
-             class="absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-1000"
-             style="filter: brightness(0.9) contrast(1.1); pointer-events: none;" />
+             class="absolute inset-0 w-full h-full object-cover z-0"
+             style="filter: brightness(0.9) contrast(1.1); pointer-events: none; transition: opacity 0.8s ease;" />
 
-        <canvas id="vessel-canvas" class="relative z-10 opacity-0 transition-opacity duration-700"></canvas>
+        <canvas id="vessel-canvas" class="relative z-10" style="opacity: 1;"></canvas>
         
         <div class="vessel-content px-8 md:px-24 w-full max-w-7xl">
-            <div class="flex flex-col gap-6 opacity-0 pt-20 md:pt-28" id="vessel-text">
+            <div class="flex flex-col gap-6" id="vessel-text" style="opacity: 0; transform: translateY(20px);">
                 <span class="font-label text-secondary tracking-[0.4em] uppercase text-[10px] md:text-sm">Exclusivité de Paris à Dubaï</span>
                 <h1 class="font-headline italic text-4xl md:text-7xl text-primary leading-tight max-w-4xl">
                     L'Art de la Seduction <br/> <span class="not-italic text-on-surface">Sans Limites</span>
@@ -342,20 +342,19 @@
     const preloadImages = async () => {
         const promises = [];
         for (let i = 0; i < frameCount; i++) {
-            // Skip frame 0 as it's handled by fast-load
+            // Index 0 is handled separately for fast startup
             if (i === 0 && images[0]) continue;
 
             const img = new Image();
             img.src = currentFrame(i);
-            images[i] = img; // Direct index assignment to prevent shifting
+            images[i] = img; 
             
             if (img.decode) {
                 promises.push(img.decode().catch(e => console.error("Decode error", e)));
             }
         }
         await Promise.all(promises);
-        console.log("All frames decoded.");
-        render();
+        console.log("360 Sequence Ready.");
     };
 
     // Responsive Canvas
@@ -419,22 +418,25 @@
         const fallback = document.getElementById("vessel-fallback");
         const canvasEl = document.getElementById("vessel-canvas");
 
-        // 1. Fast-render the first frame immediately
+        // 1. Force load the first frame for immediate display
         const firstImg = new Image();
         firstImg.src = currentFrame(0);
         images[0] = firstImg;
-        
-        await new Promise(resolve => {
-            if (firstImg.complete) resolve();
-            else firstImg.onload = resolve;
-        });
-        
-        render();
-        // Reveal canvas and hide fallback once first frame is drawn
-        canvasEl.style.opacity = "1";
-        if (fallback) fallback.style.opacity = "0";
 
-        // 2. Load and decode the rest in the background
+        const showFirstFrame = () => {
+            render();
+            // Reveal Hero elements immediately after first draw
+            if (fallback) fallback.style.opacity = "0";
+            gsap.to("#vessel-text", { opacity: 1, y: 0, duration: 1.5, ease: "power2.out" });
+        };
+
+        if (firstImg.complete) {
+            showFirstFrame();
+        } else {
+            firstImg.onload = showFirstFrame;
+        }
+
+        // 2. Start preloading the rest in background
         await preloadImages();
 
         // 3. Activate the GSAP scroll interaction
@@ -450,24 +452,14 @@
             }
         });
 
-        // 4. Entrance animation for text
-        gsap.to("#vessel-text", {
-            opacity: 1,
-            y: -20,
-            duration: 1.5,
-            ease: "power2.out",
-            scrollTrigger: {
-                trigger: "#vessel-section",
-                start: "top top",
-                end: "top+=100",
-                scrub: 1
-            }
-        });
+        // 4. Entrance handled by initBoutique (Step 1)
     };
 
     gsap.registerPlugin(ScrollTrigger);
     window.addEventListener("resize", resizeCanvas);
     resizeCanvas();
+    
+    // Start the engine
     initBoutique();
 
     // --- Premium Reveals & Page Transitions ---
