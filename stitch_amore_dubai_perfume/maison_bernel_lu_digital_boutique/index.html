@@ -618,17 +618,36 @@
         firstImg.src = currentFrame(0);
         images[0] = firstImg;
 
+        const hideLoader = () => {
+            const preloader = document.getElementById("preloader");
+            if (preloader && preloader.style.opacity !== "0") {
+                gsap.to(preloader, { 
+                    opacity: 0, 
+                    pointerEvents: "none", 
+                    duration: 1.2, 
+                    ease: "power3.inOut",
+                    onComplete: () => {
+                        preloader.style.display = "none";
+                        // Reveal Hero text after loader is gone for extra polish
+                        gsap.to("#vessel-text", { opacity: 1, y: 40, duration: 2, delay: 0.2 });
+                    }
+                });
+            }
+        };
+
         const showFirstFrame = () => {
             // Only hide the fallback if the canvas successfully draws the first frame
             if (render()) {
                 if (fallback) fallback.style.opacity = "0";
-                // Hide Preloader
-                gsap.to("#preloader", { opacity: 0, pointerEvents: "none", duration: 1, ease: "power2.inOut" });
+                hideLoader();
             } else {
                 // If draw failed, try again in 50ms (safety loop)
                 setTimeout(showFirstFrame, 50);
             }
         };
+
+        // SAFETY: Force hide loader after 3.5 seconds even if render fails
+        setTimeout(hideLoader, 3500);
 
         if (firstImg.complete) {
             showFirstFrame();
