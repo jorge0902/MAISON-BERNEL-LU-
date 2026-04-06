@@ -403,7 +403,9 @@
 
         // Balanced Position Logic:
         // Centered horizontally, pushed down slightly to respect the Nav Bar
-        offsetX = (canvas.width - finalWidth) / 2;
+        // Shift right on desktop ONLY to balance the hero text
+        let xShift = window.innerWidth > 768 ? (canvas.width * 0.12) : 0; 
+        offsetX = ((canvas.width - finalWidth) / 2) + xShift;
         offsetY = ((canvas.height - finalHeight) / 2) + (canvas.height * 0.12);
 
         // Fill background with the signature 'Maison Bernel' crimson to prevent gaps
