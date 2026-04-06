@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface": "#e5e2e1",
+                    "on-error": "#690005",
+                    "on-tertiary-container": "#c0a9a9",
+                    "on-surface-variant": "#e3beb8",
+                    "surface-container": "#201f1f",
+                    "error": "#ffb4ab",
+                    "surface": "#131313",
+                    "on-primary-container": "#ff8f88",
+                    "on-error-container": "#ffdad6",
+                    "tertiary-fixed": "#f6dddc",
+                    "background": "#131313",
+                    "surface-variant": "#353534",
+                    "on-primary-fixed": "#410004",
+                    "surface-container-high": "#2a2a2a",
+                    "surface-container-lowest": "#0e0e0e",
+                    "surface-container-highest": "#353534",
+                    "on-primary": "#68000a",
+                    "error-container": "#93000a",
+                    "primary": "#ffb3ad",
+                    "secondary": "#e9c349",
+                    "primary-container": "#861117",
+                    "surface-dim": "#131313",
+                    "on-tertiary": "#3c2d2d",
+                    "inverse-on-surface": "#313030",
+                    "secondary-fixed-dim": "#e9c349",
+                    "inverse-primary": "#ad302f",
+                    "on-secondary": "#3c2f00",
+                    "surface-bright": "#393939",
+                    "surface-container-low": "#1c1b1b",
+                    "primary-fixed-dim": "#ffb3ad",
+                    "on-secondary-fixed-variant": "#574500",
+                    "tertiary-container": "#4f3e3e",
+                    "primary-fixed": "#ffdad7",
+                    "secondary-fixed": "#ffe088",
+                    "tertiary-fixed-dim": "#d9c1c0",
+                    "outline": "#aa8984",
+                    "secondary-container": "#af8d11",
+                    "on-secondary-container": "#342800",
+                    "on-secondary-fixed": "#241a00",
+                    "tertiary": "#d9c1c0",
+                    "outline-variant": "#5a403c",
+                    "inverse-surface": "#e5e2e1",
+                    "on-tertiary-fixed-variant": "#544342",
+                    "on-primary-fixed-variant": "#8c171b",
+                    "on-background": "#e5e2e1",
+                    "surface-tint": "#ffb3ad",
+                    "on-tertiary-fixed": "#261818"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": [
+                            "Noto Serif"
+                    ],
+                    "body": [
+                            "Manrope"
+                    ],
+                    "label": [
+                            "Manrope"
+                    ]
+            }
+    },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-nav {
+            background: rgba(19, 19, 19, 0.6);
+            backdrop-filter: blur(40px);
+        }
+        .ambient-glow {
+            box-shadow: 0 4px 50px rgba(134, 17, 23, 0.15);
+        }
+        .gold-gradient {
+            background: linear-gradient(135deg, #8b1e1e 0%, #e9c349 45%, #fff5d7 50%, #e9c349 55%, #8b1e1e 100%);
+            background-size: 400% 400%;
+            animation: metallic-shimmer 8s ease infinite;
+            border: 0.5px solid rgba(255, 255, 255, 0.4);
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.2);
+            box-shadow: 
+                inset 0 1px 1px rgba(255, 255, 255, 0.3),
+                0 4px 20px rgba(0, 0, 0, 0.4),
+                0 0 15px rgba(139, 30, 30, 0.2);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            cursor: pointer;
+            backdrop-filter: brightness(1.1);
+        }
+        .gold-gradient:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.15);
+            box-shadow: 
+                inset 0 1px 2px rgba(255, 255, 255, 0.5),
+                0 10px 40px rgba(0, 0, 0, 0.5),
+                0 0 25px rgba(233, 195, 73, 0.2);
+        }
+        .metallic-gold:active {
+            transform: translateY(1px);
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        @keyframes metallic-shimmer {
+            0% { background-position: 0% 50% }
+            50% { background-position: 100% 50% }
+            100% { background-position: 0% 50% }
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .parallax-img {
+            transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .text-reveal {
+            letter-spacing: 0.2em;
+        }
+        #vessel-canvas {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            will-change: transform;
+        }
+        .vessel-content {
+            position: relative;
+            z-index: 10;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body overflow-x-hidden">
+<!-- Top Navigation -->
+<nav class="fixed top-0 w-full z-50 glass-nav shadow-[0_4px_30px_rgba(134,17,23,0.1)]">
+<div class="flex justify-between items-center w-full px-8 py-6 max-w-[1920px] mx-auto">
+<div class="font-headline text-2xl tracking-tighter text-primary dark:text-primary">Maison Bernel Lué</div>
+<div class="hidden md:flex gap-12 items-center">
+<a class="font-label tracking-[0.2em] uppercase text-xs text-white/70 hover:text-secondary duration-500 transition-colors" href="#">La Collection</a>
+<a class="font-label tracking-[0.2em] uppercase text-xs text-white/70 hover:text-secondary duration-500 transition-colors" href="#">Notes</a>
+<a class="font-label tracking-[0.2em] uppercase text-xs text-white/70 hover:text-secondary duration-500 transition-colors" href="#">The Vault</a>
+<a class="font-label tracking-[0.2em] uppercase text-xs text-secondary font-medium transition-all scale-95" href="#">Boutique</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="material-symbols-outlined text-primary hover:text-secondary transition-colors" data-icon="shopping_bag">shopping_bag</button>
+<button class="md:hidden material-symbols-outlined text-on-surface" data-icon="menu">menu</button>
+</div>
+</div>
+</nav>
+<!-- High-End 360° Vessel Scroll-Sequence (HERO) -->
+<section id="vessel-section" class="relative h-[400vh] bg-surface flex flex-col items-center">
+    <div class="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
+        <!-- Background Ambient Glow -->
+        <div class="absolute w-[800px] h-[800px] bg-primary/10 blur-[180px] rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+        
+        <canvas id="vessel-canvas"></canvas>
+        
+        <div class="vessel-content px-8 md:px-24 w-full max-w-7xl">
+            <div class="flex flex-col gap-6 opacity-0 pt-20 md:pt-28" id="vessel-text">
+                <span class="font-label text-secondary tracking-[0.4em] uppercase text-[10px] md:text-sm">Exclusivité de Paris à Dubaï</span>
+                <h1 class="font-headline italic text-4xl md:text-7xl text-primary leading-tight max-w-4xl">
+                    L'Art de la Seduction <br/> <span class="not-italic text-on-surface">Sans Limites</span>
+                </h1>
+                <p class="font-body text-on-surface-variant max-w-md text-lg leading-relaxed mt-4">
+                    A sensory dialogue between the deep visceral reds of a Parisian night and the golden opulence of the Emirates.
+                </p>
+                <div class="pt-8">
+                    <button class="gold-gradient px-12 py-5 text-on-secondary font-label uppercase tracking-widest text-xs font-bold rounded-sm hover:brightness-110 transition-all active:scale-95 pointer-events-auto">
+                        Discover the Collection
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 animate-bounce opacity-40">
+            <span class="font-label text-[10px] tracking-[0.3em] uppercase text-on-surface-variant">Scroll to Rotate</span>
+            <span class="material-symbols-outlined text-primary">expand_more</span>
+        </div>
+    </div>
+</section>
+<!-- The Product Spotlight -->
+<section class="relative py-32 px-8 bg-surface">
+<div class="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-24 items-center">
+<!-- Left Side: Image Overlap -->
+<div class="md:col-span-7 relative reveal">
+<div class="relative z-20 w-4/5 ml-auto translate-x-4 md:translate-x-12 translate-y-12 parallax-img" id="parallax-target-1">
+<div class="bg-surface-container-high p-4 ambient-glow border border-white/5">
+<img class="w-full h-auto aspect-[4/5] object-cover" data-alt="exclusive high-end perfume bottle portrait" src="../../imagenes/WhatsApp%20Image%202026-04-05%20at%2012.44.18%20PM.jpeg"/>
+</div>
+</div>
+<div class="absolute top-0 left-0 z-10 w-3/4 -translate-y-8">
+<div class="bg-surface-container p-4 border border-white/5 opacity-80">
+<img class="w-full h-auto aspect-[4/5] object-cover" data-alt="an open luxury perfume box in deep velvet red with golden inner lining, revealing an exquisite silk-lined interior" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4-qGyU0yDscvex3_vjW_N5wCk_5FTdZDyDu6thtmdR7xLBHlR0ilCubVcyG4XSp7ZX_3jQIFsQMrZ87pvoLtI4hs7FykRC0ijTrmj5L6nnFLabaD2Jh4QaDZZK1rQmemjIU3BTFTRgWmhqGF-ZmDY2p-M9s-XODGh-Nz3W9nXnKwqXTXXMhmhmYzbpbTUtgTeGLgfb67GeGaycKtHLUE4ObkWqI9PRolvoEDKq_nmeXKLN6Ifq8VkLRg1Ye10ZVJWxw3ZOHPC8xc_"/>
+</div>
+</div>
+</div>
+<!-- Right Side: Content -->
+<div class="md:col-span-5 flex flex-col gap-10 md:pl-20 reveal">
+<div class="inline-flex">
+<span class="font-headline italic text-2xl text-secondary border-b border-secondary/30 pb-2 pr-8">The First Edition</span>
+</div>
+<div class="space-y-6">
+<h2 class="font-headline text-4xl text-on-surface">Maison Bernel Lué No. 1</h2>
+<p class="font-body text-on-surface-variant leading-relaxed text-lg">
+                        The first edition represents the absolute pinnacle of our olfactory journey. Hand-poured in France and curated with rare oud oils sourced directly from the heart of the Dubai desert.
+                    </p>
+</div>
+<div class="flex flex-col gap-4">
+<div class="flex justify-between items-end pb-4 border-b border-outline-variant/30">
+<span class="font-label text-on-surface-variant uppercase tracking-widest text-xs">Eau de Parfum Intense / 100ml</span>
+<span class="font-headline text-3xl text-secondary">€380</span>
+</div>
+<button class="w-full bg-primary-container text-on-primary-container px-8 py-5 font-label uppercase tracking-[0.2em] text-sm font-bold hover:bg-primary hover:text-on-primary transition-colors flex items-center justify-center gap-3">
+                        Add to Collection
+                        <span class="material-symbols-outlined text-lg" data-icon="shopping_bag">shopping_bag</span>
+</button>
+<p class="text-center font-label text-[10px] text-on-surface-variant tracking-widest opacity-60">
+                        LIMITED QUANTITIES AVAILABLE FOR FIRST EDITION
+                    </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Craftsmanship Section -->
+<section class="bg-surface-container-low py-32 px-8">
+<div class="max-w-[1400px] mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-24 items-center">
+<div class="space-y-12 reveal">
+<div class="space-y-4">
+<label class="font-label text-secondary uppercase tracking-[0.3em] text-[10px]">Savoir-Faire</label>
+<h2 class="font-headline text-5xl italic leading-tight">The French Hand <br/> <span class="not-italic text-on-surface">The Dubai Soul</span></h2>
+</div>
+<div class="grid grid-cols-1 gap-12">
+<div class="space-y-2">
+<h4 class="font-label text-primary uppercase text-xs tracking-widest">Parisian Manufacture</h4>
+<p class="text-on-surface-variant font-body leading-relaxed">Each bottle is hand-finished in the historic workshops of Grasse, following methods unchanged for three centuries. The glass is tempered with a proprietary crimson stain unique to Maison Bernel Lué.</p>
+</div>
+<div class="space-y-2">
+<h4 class="font-label text-primary uppercase text-xs tracking-widest">Oriental Inspiration</h4>
+<p class="text-on-surface-variant font-body leading-relaxed">The scent structure is an architectural homage to Dubai's skyline—vertical, ambitious, and layered with the heat of the desert wind and the richness of ancient spice markets.</p>
+</div>
+</div>
+</div>
+<div class="relative h-[600px]">
+<div class="absolute inset-0 bg-primary-container/20 rounded-sm"></div>
+<img class="w-full h-full object-cover mix-blend-overlay" data-alt="macro texture shot of molten gold liquid swirling with deep red ink, creating a luxurious and seductive abstract pattern" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdcKhGE_nYLhrKgwfdpWGJ-EiFvAO9-z1QnLrIxMSLh_cVMC02_LSrHp9JdwfYbHAUOVO_nguVzeN8Ny4sqK5xxabNwonIppL6lcQmiciRSlYpe6WDaUQI5jY1B0A6RD4S0axhpvv4QBCVX3y7Kmz1vXjRn4Cy9Utv5hdHWMGCkdZod7_AEv91h77ql6IKDBkEAdHPVaGPmv_d_n0-IuI8wGUDXvdP7KU9kDHA3THI7Ad-7quDulUa0HWeQaqCQAVI41Gcne4vcpZB"/>
+<div class="absolute inset-0 flex items-center justify-center p-12">
+<div class="border border-secondary/20 p-8 backdrop-blur-xl bg-black/40 text-center space-y-4 max-w-sm">
+<span class="material-symbols-outlined text-secondary text-4xl" data-icon="verified">verified</span>
+<h3 class="font-headline text-xl text-secondary">Heritage Guaranteed</h3>
+<p class="text-on-surface text-sm font-body">Each vessel is serialized and accompanied by a certificate of origin signed by the master perfumer.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Olfactory Notes (Pill Layout) -->
+<section class="py-24 bg-surface-container-lowest overflow-hidden">
+<div class="max-w-[1400px] mx-auto px-8 reveal">
+<h3 class="font-label text-white/40 uppercase tracking-[0.5em] text-center mb-16 text-xs">Olfactory Narrative</h3>
+<div class="flex flex-wrap justify-center gap-4" id="notes-container">
+<span class="px-8 py-3 rounded-full border border-outline-variant/30 font-label text-sm tracking-widest text-on-surface hover:bg-primary-container/20 hover:border-primary/40 transition-all cursor-default">AMBER ROUGE</span>
+<span class="px-8 py-3 rounded-full border border-outline-variant/30 font-label text-sm tracking-widest text-on-surface hover:bg-primary-container/20 hover:border-primary/40 transition-all cursor-default">CAMBODIAN OUD</span>
+<span class="px-8 py-3 rounded-full border border-outline-variant/30 font-label text-sm tracking-widest text-on-surface hover:bg-primary-container/20 hover:border-primary/40 transition-all cursor-default">DAMASK ROSE</span>
+<span class="px-8 py-3 rounded-full border border-outline-variant/30 font-label text-sm tracking-widest text-on-surface hover:bg-primary-container/20 hover:border-primary/40 transition-all cursor-default">SAFFRON</span>
+<span class="px-8 py-3 rounded-full border border-outline-variant/30 font-label text-sm tracking-widest text-on-surface hover:bg-primary-container/20 hover:border-primary/40 transition-all cursor-default">POMEGRANATE HEART</span>
+<span class="px-8 py-3 rounded-full border border-outline-variant/30 font-label text-sm tracking-widest text-on-surface hover:bg-primary-container/20 hover:border-primary/40 transition-all cursor-default">INCENSE</span>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="w-full bg-[#0e0e0e] border-t border-white/5">
+<div class="w-full px-12 py-16 flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="font-headline italic text-xl text-primary-container">Maison Bernel Lué</div>
+<div class="flex gap-10">
+<a class="font-label text-[10px] tracking-widest uppercase text-white/40 hover:text-primary transition-all duration-700" href="#">Privacy</a>
+<a class="font-label text-[10px] tracking-widest uppercase text-white/40 hover:text-primary transition-all duration-700" href="#">Terms</a>
+<a class="font-label text-[10px] tracking-widest uppercase text-white/40 hover:text-primary transition-all duration-700" href="#">Shipping</a>
+<a class="font-label text-[10px] tracking-widest uppercase text-white/40 hover:text-primary transition-all duration-700" href="#">Contact</a>
+</div>
+<div class="font-label text-[10px] tracking-widest uppercase text-secondary">
+                © 2024 Maison Bernel Lué. Paris • Dubai
+            </div>
+</div>
+</footer>
+<script>
+    // --- Maison Bernel Lué 360° Sequence Logic ---
+    
+    const canvas = document.getElementById("vessel-canvas");
+    const context = canvas.getContext("2d");
+    const frameCount = 80;
+    
+    // Path logic based on local structure
+    const currentFrame = index => (
+        `../../ezgif-8fd84165fe920d55-png-split/ezgif-frame-${(index + 1).toString().padStart(3, '0')}.png`
+    );
+
+    const images = [];
+    const airtable = {
+        frame: 0
+    };
+
+    // Preloader with GPU Decoding for zero-flicker bidirectional scroll
+    const preloadImages = async () => {
+        const promises = [];
+        for (let i = 0; i < frameCount; i++) {
+            const img = new Image();
+            img.src = currentFrame(i);
+            images.push(img);
+            // Ensure the image is decoded by the GPU before it's ever needed
+            if (img.decode) {
+                promises.push(img.decode().catch(e => console.error("Decode error", e)));
+            }
+        }
+        await Promise.all(promises);
+        console.log("All frames decoded and ready for GPU.");
+        // Trigger initial render once everything is ready
+        render();
+    };
+
+    // Responsive Canvas
+    function resizeCanvas() {
+        // Set canvas internal resolution to match logical size or fixed resolution for quality
+        const dpr = window.devicePixelRatio || 1;
+        canvas.width = window.innerWidth * dpr;
+        canvas.height = window.innerHeight * dpr;
+        render();
+    }
+
+    // --- Immersive 'Cover' & 'Perspective Correction' Logic ---
+    let lastFrame = -1;
+
+    function render() {
+        // Use Math.round for smoother frame selection during interpolation
+        const frameIndex = Math.round(airtable.frame);
+        
+        // Performance: Only redraw if the frame has actually changed
+        if (frameIndex === lastFrame) return;
+        lastFrame = frameIndex;
+
+        const img = images[frameIndex];
+        if (!img || !img.complete) return;
+
+        context.clearRect(0, 0, canvas.width, canvas.height);
+
+        // --- Immersive 'Cover' & 'Perspective Correction' Logic ---
+        const imgRatio = img.width / img.height;
+        const canvasRatio = canvas.width / canvas.height;
+        let drawWidth, drawHeight, offsetX, offsetY;
+
+        // Use 'Cover' logic to fill the screen
+        if (imgRatio > canvasRatio) {
+            drawHeight = canvas.height;
+            drawWidth = canvas.height * imgRatio;
+        } else {
+            drawWidth = canvas.width;
+            drawHeight = canvas.width / imgRatio;
+        }
+
+        // Apply an optimized 'Zoom' to perfectly frame the full composition
+        const zoom = 0.92; 
+        const finalWidth = drawWidth * zoom;
+        const finalHeight = drawHeight * zoom;
+
+        // Balanced Position Logic:
+        // Centered horizontally, pushed down slightly to respect the Nav Bar
+        offsetX = (canvas.width - finalWidth) / 2;
+        offsetY = ((canvas.height - finalHeight) / 2) + (canvas.height * 0.12);
+
+        // Fill background with the signature 'Maison Bernel' crimson to prevent gaps
+        context.fillStyle = "#4a0404"; // Deep crimson matching the vessel's atmosphere
+        context.fillRect(0, 0, canvas.width, canvas.height);
+
+        context.drawImage(img, offsetX, offsetY, finalWidth, finalHeight);
+    }
+
+    // Initialize
+    gsap.registerPlugin(ScrollTrigger);
+    
+    // Resize listener
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
+    // GSAP ScrollTrigger
+    preloadImages().then(() => {
+        // Sequence Animation
+        gsap.to(airtable, {
+            frame: frameCount - 1,
+            ease: "none",
+            scrollTrigger: {
+                trigger: "#vessel-section",
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 1.2, // Balanced inertia for responsiveness and smoothness
+                onUpdate: render
+            }
+        });
+
+        // Entrance animation for text
+        gsap.to("#vessel-text", {
+            opacity: 1,
+            y: -20,
+            duration: 1.5,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: "#vessel-section",
+                start: "top top",
+                end: "top+=100", // Start text fade-in almost immediately
+                scrub: 1
+            }
+        });
+    });
+
+    // --- Premium Reveals & Page Transitions ---
+    gsap.utils.toArray(".reveal").forEach((elem) => {
+        gsap.to(elem, {
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
+            stagger: 0.3,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: elem,
+                start: "top 85%",
+                toggleActions: "play none none reverse"
+            }
+        });
+    });
+
+    // Stagger for Olfactory Notes
+    gsap.from("#notes-container span", {
+        opacity: 0,
+        y: 20,
+        stagger: 0.1,
+        duration: 0.8,
+        ease: "power2.out",
+        scrollTrigger: {
+            trigger: "#notes-container",
+            start: "top 90%"
+        }
+    });
+
+    // Suble Mouse Parallax for "The First Edition" Images
+    document.addEventListener("mousemove", (e) => {
+        const x = (e.clientX - window.innerWidth / 2) * 0.015;
+        const y = (e.clientY - window.innerHeight / 2) * 0.015;
+        
+        const img = document.querySelector("#parallax-target-1");
+        if (img) {
+            img.style.transform = `translate3d(${12 + x}px, ${12 + y}px, 0)`;
+        }
+    });
+</script>
+</body></html>

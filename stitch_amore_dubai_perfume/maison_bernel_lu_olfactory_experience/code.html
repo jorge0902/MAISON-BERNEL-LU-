@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface": "#e5e2e1",
+                    "on-error": "#690005",
+                    "on-tertiary-container": "#c0a9a9",
+                    "on-surface-variant": "#e3beb8",
+                    "surface-container": "#201f1f",
+                    "error": "#ffb4ab",
+                    "surface": "#131313",
+                    "on-primary-container": "#ff8f88",
+                    "on-error-container": "#ffdad6",
+                    "tertiary-fixed": "#f6dddc",
+                    "background": "#131313",
+                    "surface-variant": "#353534",
+                    "on-primary-fixed": "#410004",
+                    "surface-container-high": "#2a2a2a",
+                    "surface-container-lowest": "#0e0e0e",
+                    "surface-container-highest": "#353534",
+                    "on-primary": "#68000a",
+                    "error-container": "#93000a",
+                    "primary": "#ffb3ad",
+                    "secondary": "#e9c349",
+                    "primary-container": "#861117",
+                    "surface-dim": "#131313",
+                    "on-tertiary": "#3c2d2d",
+                    "inverse-on-surface": "#313030",
+                    "secondary-fixed-dim": "#e9c349",
+                    "inverse-primary": "#ad302f",
+                    "on-secondary": "#3c2f00",
+                    "surface-bright": "#393939",
+                    "surface-container-low": "#1c1b1b",
+                    "primary-fixed-dim": "#ffb3ad",
+                    "on-secondary-fixed-variant": "#574500",
+                    "tertiary-container": "#4f3e3e",
+                    "primary-fixed": "#ffdad7",
+                    "secondary-fixed": "#ffe088",
+                    "tertiary-fixed-dim": "#d9c1c0",
+                    "outline": "#aa8984",
+                    "secondary-container": "#af8d11",
+                    "on-secondary-container": "#342800",
+                    "on-secondary-fixed": "#241a00",
+                    "tertiary": "#d9c1c0",
+                    "outline-variant": "#5a403c",
+                    "inverse-surface": "#e5e2e1",
+                    "on-tertiary-fixed-variant": "#544342",
+                    "on-primary-fixed-variant": "#8c171b",
+                    "on-background": "#e5e2e1",
+                    "surface-tint": "#ffb3ad",
+                    "on-tertiary-fixed": "#261818"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Noto Serif"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-nav {
+            background: rgba(19, 19, 19, 0.6);
+            backdrop-filter: blur(20px);
+        }
+        .ruby-gradient-bg {
+            background: radial-gradient(circle at top right, #350508 0%, #131313 70%);
+        }
+        .text-glow {
+            text-shadow: 0 0 20px rgba(255, 179, 173, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary/30">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-black/60 backdrop-blur-xl shadow-[0_4px_30px_rgba(134,17,23,0.1)]">
+<div class="flex justify-between items-center w-full px-8 py-6 max-w-[1920px] mx-auto">
+<div class="flex items-center gap-12">
+<span class="font-serif text-2xl tracking-tighter text-red-300 dark:text-red-200">Maison Bernel Lué</span>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-sans tracking-[0.2em] uppercase text-xs text-white/70 hover:text-yellow-200 transition-colors duration-500" href="#">La Collection</a>
+<a class="font-sans tracking-[0.2em] uppercase text-xs text-yellow-400 font-medium scale-95 transition-transform" href="#">Notes</a>
+<a class="font-sans tracking-[0.2em] uppercase text-xs text-white/70 hover:text-yellow-200 transition-colors duration-500" href="#">The Vault</a>
+<a class="font-sans tracking-[0.2em] uppercase text-xs text-white/70 hover:text-yellow-200 transition-colors duration-500" href="#">Heritage</a>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="font-sans tracking-[0.2em] uppercase text-xs text-red-300 hover:text-yellow-200 transition-colors duration-500">Boutique</button>
+<span class="material-symbols-outlined text-red-300 cursor-pointer hover:text-yellow-200 transition-colors duration-500">shopping_bag</span>
+</div>
+</div>
+</nav>
+<main class="ruby-gradient-bg">
+<!-- Hero Section -->
+<section class="relative min-h-screen flex flex-col items-center justify-center pt-32 px-6 overflow-hidden">
+<div class="absolute inset-0 opacity-40 mix-blend-overlay">
+<div class="absolute inset-0 bg-gradient-to-b from-transparent via-background to-background"></div>
+</div>
+<div class="z-10 text-center max-w-5xl">
+<h4 class="font-label text-secondary tracking-[0.4em] uppercase text-[10px] mb-6">The Olfactory Architecture</h4>
+<h1 class="font-headline text-display-lg text-6xl md:text-8xl italic leading-tight text-glow text-on-surface">
+                    The Architecture <br/> of Scent
+                </h1>
+</div>
+<div class="relative w-full max-w-4xl mt-16 aspect-[16/9] group">
+<div class="absolute -inset-4 bg-primary-container/20 blur-3xl rounded-full"></div>
+<img class="relative w-full h-full object-cover rounded-sm shadow-2xl transition-transform duration-1000 group-hover:scale-[1.02]" data-alt="Close-up of a Maison Bernel Lué perfume bottle with deep red liquid, captured with dramatic cinematic lighting highlighting the glass facets and golden cap." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1cp8nlpDXw0cjk3uq0bgdf7IN3nm6IXRu8yglTUuKTZn8vo-Gwl-AIxHjsFzj3wPxmEuVTih5xha35W75X4uOspoq10DVlVJXpiv2c248TO2v4_iNWzgisvkNkc3TlQVxn0sX8XJNQ3myzg-2jyzal6GbhlSkNxg-vjA8lvla18EKvr1vfLBZgPdAPMnTX-B8drz3tXOmte8BKTbjwUPfa0mxkx2qorLMitz1e7SLRMYQKhNTro9pn_0320kFK2E_N2FWrhe3PD56"/>
+</div>
+</section>
+<!-- Seduction Narrative -->
+<section class="py-32 px-8 md:px-24 grid md:grid-cols-2 gap-20 items-center max-w-[1440px] mx-auto">
+<div class="space-y-8">
+<span class="font-label text-secondary tracking-widest uppercase text-xs">Origin &amp; Heritage</span>
+<h2 class="font-headline text-4xl md:text-5xl leading-tight">A French soul, <br/> refined by Dubai's <br/> midnight heat.</h2>
+<p class="font-body text-on-surface-variant leading-relaxed max-w-md text-lg font-light">
+                    Maison Bernel Lué bridges the silence of Parisian ateliers with the opulent intensity of Middle Eastern nights. It is a dialogue between the structured and the sensory, designed for those who curate their presence with absolute intent.
+                </p>
+<div class="h-px w-24 bg-gradient-to-r from-secondary to-transparent"></div>
+</div>
+<div class="relative aspect-square md:aspect-[4/5] overflow-hidden">
+<img class="w-full h-full object-cover grayscale-[0.2] hover:grayscale-0 transition-all duration-700" data-alt="Artistic macro shot of red liquid ripples in dark lighting, reflecting golden sparks, evoking the sensation of precious perfume oils." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWDRhs7zub6bVh34zzO3tmbDrifcWt01syz3KTKMT7zZIyPQbYmspoTm2XUMeGAydsl3_9MHNHkvqHNjQFTPwrtUu-yVgV9VVncdE_BpJEmOxVZ9IKsUA1XProIfihEJJMAAJyVCQrE6jpZ6zt4h_09rbn1ZyLgJm5g3rAQTJ9wYL-S1gcmmUD9suzrDbb4zD-nYX4tICC7cRt2bMCVhI9g-AjQtLKYZoR08qW9xLfrz8XDoPgIjcmLPg0nBuT2JTX9ObhoVRBwyad"/>
+</div>
+</section>
+<!-- The Notes: Editorial Bento -->
+<section class="py-32 bg-surface-container-lowest/50">
+<div class="max-w-[1440px] mx-auto px-8 md:px-12">
+<div class="mb-20">
+<h3 class="font-headline text-3xl italic text-primary">The Composition</h3>
+<p class="font-label tracking-widest uppercase text-[10px] text-secondary mt-2">A Triptych of Pure Desire</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 h-auto md:h-[800px]">
+<!-- Main Note: Golden Amber -->
+<div class="md:col-span-7 bg-surface-container-low p-12 flex flex-col justify-between group overflow-hidden relative">
+<div class="z-10">
+<h4 class="font-headline text-5xl mb-4">Golden Amber</h4>
+<p class="font-body text-on-surface-variant max-w-xs leading-relaxed">The foundational warmth that lingers on the skin, a resinous glow that commands the room with silent authority.</p>
+</div>
+<div class="absolute bottom-[-10%] right-[-10%] w-2/3 opacity-20 group-hover:opacity-40 transition-opacity duration-1000">
+<span class="material-symbols-outlined text-[300px] text-secondary" style="font-variation-settings: 'FILL' 1;">fluid_med</span>
+</div>
+<div class="z-10 flex gap-4">
+<span class="px-4 py-1.5 rounded-full border border-outline-variant/30 text-[10px] uppercase tracking-widest font-label">Animalic</span>
+<span class="px-4 py-1.5 rounded-full border border-outline-variant/30 text-[10px] uppercase tracking-widest font-label">Deep</span>
+</div>
+</div>
+<!-- Vertical Sidebar -->
+<div class="md:col-span-5 grid grid-rows-2 gap-6">
+<!-- Top Note: Pomegranate -->
+<div class="bg-primary-container/20 p-8 flex items-center justify-between group">
+<div class="space-y-4">
+<h5 class="font-headline text-3xl">Ruby Fruits</h5>
+<p class="font-label text-[10px] tracking-[0.2em] text-primary italic">Pomegranate &amp; Wild Cherry</p>
+</div>
+<div class="w-24 h-24 rounded-full bg-primary/10 flex items-center justify-center border border-primary/20 group-hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-4xl text-primary">eco</span>
+</div>
+</div>
+<!-- Secondary Note: Oud -->
+<div class="bg-surface-container-high p-8 flex flex-col justify-end">
+<p class="font-body text-sm text-on-surface-variant mb-6 uppercase tracking-tighter">The Invisible Thread</p>
+<h5 class="font-headline text-3xl mb-4">Oud de France</h5>
+<div class="flex gap-2">
+<div class="w-1.5 h-1.5 rounded-full bg-secondary"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-secondary/40"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-secondary/20"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- The Presentation -->
+<section class="py-40 px-8 relative overflow-hidden">
+<div class="max-w-[1440px] mx-auto grid md:grid-cols-2 gap-24 items-center">
+<div class="order-2 md:order-1">
+<img class="w-full shadow-2xl rounded-sm" data-alt="A luxurious deep red perfume box with gold embossed lettering for Maison Bernel Lué, sitting on a dark reflective surface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8Wtc1KhWnPmFxZoLHVOnixhDCBgZL0BqWDtIXNfgFj1yXEl0qPN_EaiL3SS15IR2ejdE973U2NjmKPb45y_K_i4xG-t5Eo62SulKU78PswRF3BjWhm72anJy-JHTG4L_hhvDPJDnWE3X0JX7S_3UsC00sJCEXqU9adz6vYfKmdwe2oY8IxcmSwAzaYX5irVYcocAu_GfEA-0zSwhOqBKTo4U-VHSXHhCWrqOgf_h61KEJda22N5_37WsfSrMkxmraaxQtMfKy2CAf"/>
+</div>
+<div class="order-1 md:order-2 space-y-10">
+<span class="font-label text-secondary tracking-[0.5em] uppercase text-xs">The Unveiling</span>
+<h2 class="font-headline text-5xl italic leading-tight">Tactile <br/> Elegance</h2>
+<p class="font-body text-xl text-on-surface-variant leading-relaxed font-light">
+                        Every vessel is cradled in a box of hand-pressed crimson silk-paper, finished with 24-karat gold lettering. The experience begins long before the first mist touches the skin.
+                    </p>
+<div class="pt-6">
+<button class="group flex items-center gap-6">
+<span class="font-label uppercase tracking-[0.3em] text-xs py-4 border-b border-secondary/50 group-hover:border-secondary transition-all">Details of the Craft</span>
+<span class="material-symbols-outlined text-secondary transition-transform group-hover:translate-x-2">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-40 text-center relative px-6">
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container/10 to-transparent pointer-events-none"></div>
+<div class="relative z-10 space-y-12">
+<h2 class="font-headline text-5xl md:text-7xl italic text-glow">Experience the Seduction</h2>
+<div class="flex flex-col md:flex-row justify-center gap-8 pt-10">
+<button class="px-16 py-6 bg-gradient-to-r from-secondary to-secondary-container text-on-secondary font-label uppercase tracking-[0.3em] text-xs rounded-full shadow-xl hover:scale-105 transition-all active:scale-95">
+                        Discover the scent
+                    </button>
+<button class="px-16 py-6 border border-outline-variant/30 hover:bg-surface-bright/10 text-on-surface font-label uppercase tracking-[0.3em] text-xs rounded-full transition-all">
+                        Find a boutique
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#0e0e0e] border-t border-white/5 w-full px-12 py-16 flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex flex-col items-center md:items-start gap-4">
+<span class="font-serif italic text-xl text-red-900">Maison Bernel Lué</span>
+<p class="font-sans text-[10px] tracking-widest uppercase text-white/40">© 2024 Maison Bernel Lué. Paris • Dubai</p>
+</div>
+<div class="flex gap-12">
+<a class="font-sans text-[10px] tracking-widest uppercase text-white/40 hover:text-red-400 transition-all duration-700" href="#">Privacy</a>
+<a class="font-sans text-[10px] tracking-widest uppercase text-white/40 hover:text-red-400 transition-all duration-700" href="#">Terms</a>
+<a class="font-sans text-[10px] tracking-widest uppercase text-white/40 hover:text-red-400 transition-all duration-700" href="#">Shipping</a>
+<a class="font-sans text-[10px] tracking-widest uppercase text-white/40 hover:text-red-400 transition-all duration-700" href="#">Contact</a>
+</div>
+<div class="flex gap-6">
+<span class="material-symbols-outlined text-white/40 cursor-pointer hover:text-yellow-500 transition-colors">public</span>
+<span class="material-symbols-outlined text-white/40 cursor-pointer hover:text-yellow-500 transition-colors">share</span>
+</div>
+</footer>
+</body></html>
