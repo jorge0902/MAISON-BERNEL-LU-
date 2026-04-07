@@ -137,6 +137,10 @@
             opacity: 1;
             transform: translateY(0);
         }
+        .glass-card {
+            background: rgba(32, 31, 31, 0.6);
+            backdrop-filter: blur(20px);
+        }
         .parallax-img {
             transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
         }
@@ -392,14 +396,14 @@
 </div>
 </nav>
 <!-- High-End 360° Vessel Scroll-Sequence (HERO) -->
-<section id="vessel-section" class="relative h-[400vh] bg-[#4a0404] flex flex-col items-center">
+<section id="vessel-section" class="relative h-[300vh] bg-[#4a0404] flex flex-col items-center">
     <div class="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
         <!-- Background Ambient Glow -->
         <div class="absolute w-[800px] h-[800px] bg-primary/10 blur-[180px] rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
      <div class="h-full w-full relative">
         <!-- Fail-safe Fallback Image (Visible immediately) -->
         <img id="vessel-fallback" 
-             src="./assets/frames/ezgif-frame-001.png" 
+             src="./assets/frames/ezgif-frame-011.png" 
              fetchpriority="high"
              loading="eager"
              class="absolute" 
@@ -407,8 +411,29 @@
 
         <canvas id="vessel-canvas" class="relative z-10" style="opacity: 1;"></canvas>
         
-        <div class="vessel-content">
-            <div class="flex flex-col gap-6" id="vessel-text" style="opacity: 0; transform: translateY(60px); padding-top: 40px;">
+        <div class="vessel-content relative">
+            <!-- 1. Texto Inicial (Desaparece primero) -->
+            <div class="flex flex-col gap-4 absolute w-full md:w-[600px]" id="vessel-intro" style="padding-top: 15vh;">
+                <span class="font-label text-white/50 tracking-[0.4em] uppercase text-[10px] md:text-sm">Découvrez l'Excellence</span>
+                <h2 class="font-headline text-5xl md:text-6xl text-white leading-tight">
+                    The Genesis of <br/><span class="italic text-secondary">Luxury</span>
+                </h2>
+                <div class="mt-4 flex items-center gap-3">
+                    <div class="w-12 h-[1px] bg-secondary/50"></div>
+                    <span class="font-label text-[10px] tracking-[0.2em] text-white/40 uppercase">Initiate Scroll</span>
+                </div>
+            </div>
+
+            <!-- 2. Texto Intermedio (Aparece y desaparece en el medio) -->
+            <div class="flex flex-col gap-4 absolute w-full md:w-[600px]" id="vessel-mid" style="padding-top: 20vh; opacity: 0; pointer-events: none;">
+                <span class="font-label text-secondary tracking-[0.4em] uppercase text-[10px] md:text-sm">A Symphony in Amber</span>
+                <h2 class="font-headline text-5xl md:text-6xl text-white leading-tight">
+                    Where Gold Meets <br/><span class="italic text-primary">The Obsidian Night</span>
+                </h2>
+            </div>
+
+            <!-- 3. Texto Final (Aparece al final del recorrido) -->
+            <div class="flex flex-col gap-6" id="vessel-text" style="opacity: 0; transform: translateY(60px); padding-top: 40px; pointer-events: auto;">
                 <span class="font-label text-secondary tracking-[0.4em] uppercase text-[10px] md:text-sm">Exclusivité de Paris à Dubaï</span>
                 <h1 class="font-headline italic text-4xl md:text-7xl text-primary leading-tight max-w-4xl">
                     L'Art de la Seduction <br/> <span class="not-italic text-on-surface">Sans Limites</span>
@@ -474,6 +499,48 @@
 </div>
 </div>
 </section>
+
+<!-- Heritage Section: Two-Column Fusion (The Dubai Blueprint & Parisian Soul) -->
+<section class="py-32 px-8 md:px-12 bg-surface">
+    <div class="max-w-[1400px] mx-auto space-y-32">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-24 items-center reveal">
+            <div class="relative group">
+                <div class="absolute -inset-4 bg-primary-container/10 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <img alt="Dubai Manufacture" class="relative z-10 w-full aspect-[4/5] object-cover grayscale hover:grayscale-0 transition-all duration-700" data-alt="Macro view of molten gold liquid reflecting the Burj Khalifa silhouette at dusk, warm orange and deep amber tones, architectural elegance" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkR98zlWzYsy6Oasqir4noKkxLihZW77NPi0N1dgZmFYeEUnLRg0LeCbwRZcFmMvVKjwgS2-bWQqKfvj_rtWuHPK9sYjElN2X_K8LqRKpsEy2fGzA1CnUU6139i3TKDe4WOmOYPnN3dxlUtm4CRgvDWMLh16N51YHXBPhxL0ewLRo7lUcK5Gp2rmRjhMwBXAcaCBhNUzmWS2h21FyQtKvO_heQNTJIBAADZhRPgOaHvznP-UYX7Cus-5v7O7g34fCc_CKjqAaGTV3h"/>
+                <div class="absolute -bottom-8 -right-8 glass-card p-8 border border-outline-variant/10 hidden md:block">
+                    <span class="text-secondary font-label text-4xl font-bold tracking-tighter">01</span>
+                    <h3 class="font-headline text-xl mt-2 italic">L'Origine</h3>
+                </div>
+            </div>
+            <div class="space-y-6">
+                <span class="text-primary-fixed-dim tracking-widest uppercase text-xs">The Manufacture</span>
+                <h2 class="text-4xl font-headline">The Dubai Blueprint</h2>
+                <p class="text-on-surface-variant font-body leading-loose">
+                    In the heart of the desert metropolis, our alchemy begins. We harness the raw, uncompromising intensity of Oud and Amber, processed in state-of-the-art laboratories where heat is a catalyst for purity. Each drop carries the weight of Dubai's architectural ambition.
+                </p>
+            </div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-24 items-center reveal">
+            <div class="order-2 md:order-1 space-y-6 text-right md:text-left">
+                <span class="text-primary-fixed-dim tracking-widest uppercase text-xs">The Refinement</span>
+                <h2 class="text-4xl font-headline">The Parisian Soul</h2>
+                <p class="text-on-surface-variant font-body leading-loose">
+                    Once the essence is captured, it travels to our Parisian atelier. Here, the raw strength is curated. French floral masters introduce the "silence" between the notes—the delicate whispers of Rose de Mai and Iris that transform power into seduction.
+                </p>
+            </div>
+            <div class="order-1 md:order-2 relative group">
+                <div class="absolute -inset-4 bg-secondary-container/10 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <img alt="Paris Refinement" class="relative z-10 w-full aspect-[4/5] object-cover grayscale hover:grayscale-0 transition-all duration-700" data-alt="Moody cobblestone street in Paris at night with soft streetlights reflecting on rain, romantic atmosphere, deep blue and soft gold lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8KW5StO1aTfmyf1NusqGiKWP11Hg7bLqSPbqtspm1u29wAM6bXljcpOpmvQfDHu-Uc1PSTXYVUDPGh0abSqgcmDyWt4_fHPWRs9iVNEvPH0byZWxBC1q4lBIrl0Qk41ZYcQO_p2QF8tXNfOKupN6WO_LzRgwSfe28_Euh0nk9PBvLSglypauuXO8cCW4ahDRIuelNgXLRbVxk44sB1FIN5X9OhfTaIvN4wA9kWbBw_nyvEkPKciACFAUgcpGQ2cJ_idU5GPdvkXv2"/>
+                <div class="absolute -top-8 -left-8 glass-card p-8 border border-outline-variant/10 hidden md:block">
+                    <span class="text-secondary font-label text-4xl font-bold tracking-tighter">02</span>
+                    <h3 class="font-headline text-xl mt-2 italic">Le Raffinement</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Craftsmanship Section -->
 <section class="bg-surface-container-low py-32 px-8">
 <div class="max-w-[1400px] mx-auto">
@@ -551,15 +618,15 @@
 
     const images = [];
     const airtable = {
-        frame: 0
+        frame: 10
     };
 
     // Preloader with GPU Decoding for zero-flicker bidirectional scroll
     const preloadImages = async () => {
         const promises = [];
         for (let i = 0; i < frameCount; i++) {
-            // Index 0 is handled separately for fast startup
-            if (i === 0 && images[0]) continue;
+            // Index 10 is handled separately for fast startup
+            if (i === 10 && images[10]) continue;
 
             const img = new Image();
             img.src = currentFrame(i);
@@ -587,23 +654,20 @@
 
     function render() {
         // Use Math.round for smoother frame selection during interpolation
-        const frameIndex = Math.round(airtable.frame);
+        let frameIndex = Math.round(airtable.frame);
         
-        // Performance: Only redraw if the frame has actually changed
-        if (frameIndex === lastFrame) return;
-        lastFrame = frameIndex;
+        // Ensure index doesn't go out of bounds
+        if (frameIndex >= frameCount) frameIndex = frameCount - 1;
+        if (frameIndex < 0) frameIndex = 0;
 
         const img = images[frameIndex];
         if (!img || !img.complete || img.naturalWidth === 0) return false;
-
-        context.clearRect(0, 0, canvas.width, canvas.height);
 
         // --- Immersive 'Cover' & 'Perspective Correction' Logic ---
         const imgRatio = img.width / img.height;
         const canvasRatio = canvas.width / canvas.height;
         let drawWidth, drawHeight, offsetX, offsetY;
 
-        // Use 'Cover' logic to fill the screen
         // --- Immersive 'Contain' Logic for perfect sync ---
         if (imgRatio > canvasRatio) {
             drawWidth = canvas.width;
@@ -628,6 +692,7 @@
         context.fillRect(0, 0, canvas.width, canvas.height);
 
         context.drawImage(img, offsetX, offsetY, finalWidth, finalHeight);
+        
         return true;
     }
 
@@ -638,8 +703,8 @@
 
         // 1. Force load the first frame for immediate display
         const firstImg = new Image();
-        firstImg.src = currentFrame(0);
-        images[0] = firstImg;
+        firstImg.src = currentFrame(10); // Start at frame 10
+        images[10] = firstImg;
 
         const hideLoader = () => {
             const preloader = document.getElementById("preloader");
@@ -687,7 +752,7 @@
                 trigger: "#vessel-section",
                 start: "top top",
                 end: "bottom bottom",
-                scrub: 1.2,
+                scrub: 1,
                 onUpdate: render
             }
         });
@@ -742,20 +807,56 @@
         }
     });
 
-    // --- Hero Text Scrub Revelation (Rising from Below via Scroll) ---
+    // --- 1. Initial Intro Text Fading Out ---
+    gsap.to("#vessel-intro", {
+        opacity: 0,
+        y: -100, // Move it up as it fades
+        scrollTrigger: {
+            trigger: "#vessel-section",
+            start: "top top",
+            end: "top -40%", // Fades out faster
+            scrub: 0.5
+        }
+    });
+
+    // --- 2. Intermediate Text (Enters) ---
+    gsap.fromTo("#vessel-mid", 
+        { opacity: 0, y: 150 }, 
+        { opacity: 1, y: 0,
+          scrollTrigger: {
+              trigger: "#vessel-section",
+              start: "top -30%",
+              end: "top -80%",
+              scrub: 0.5
+          }
+        }
+    );
+
+    // --- 2.5 Intermediate Text (Exits) ---
+    gsap.to("#vessel-mid", {
+        opacity: 0, y: -100,
+        scrollTrigger: {
+            trigger: "#vessel-section",
+            start: "top -110%",
+            end: "top -150%",
+            scrub: 0.5
+        }
+    });
+
+    // --- 3. Hero Text Scrub Revelation (Rising from Below via Scroll) ---
     gsap.fromTo("#vessel-text", 
         { 
             opacity: 0, 
-            y: 500 // Deep in the 2nd section (visually)
+            y: 500 // Comes from deep below
         }, 
         { 
             opacity: 1, 
-            y: 40, // Landing earlier to avoid the navbar gap
+            y: 40, // Final resting spot
             scrollTrigger: {
                 trigger: "#vessel-section",
-                start: "top top",
-                end: "top -100%", // Controlled by user's initial scroll
-                scrub: 1 // Link movement directly to scroll
+                start: "top -150%", 
+                end: "top -190%", // Timed to hit position before the user fully leaves the section
+                scrub: 0.8 
             }
         }
     );
